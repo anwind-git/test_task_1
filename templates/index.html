@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <h1>Главная страница</h1>
+       <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            {% for el in pages.iter_pages() %}
+            {% if request.args.get('q') != None %}
+                    <li class="page-item"><a class="page-link" href="/home?q={{ request.args.get('q') }}&page={{ el }}">{{ el }}</a></li>
+            {% endif %}
+            {% if request.args.get('q') == None %}
+                    <li class="page-item"><a class="page-link" href="/home?page={{ el }}">{{ el }}</a></li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </nav>
+    {% for article in pages.items %}
+        <div class="alert alert-info">
+            <h2>{{ article.rubrics }}</h2>
+            <p>{{ article.text }}</p>
+            <p><b>Дата: {{ article.created_date.date() }}</b></p>
+            <a href="/post/{{ article.id }}" class="btn btn-warning">Подробнее</a>
+        </div>
+    {% else %}
+        <br>
+        <h4 align="center">По вашему запросу ничего не найдено</h4>
+    {% endfor %}
+</div>
+{% endblock %}

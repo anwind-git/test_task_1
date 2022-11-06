@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Обновление поста
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Обновление поста</h1>
+    <form method="post">
+        <textarea name="rubrics" name="rubrics" class="form-control">{{ article.rubrics }}</textarea><br>
+        <textarea name="text" name="text" class="form-control">{{ article.text }}</textarea><br>
+        <input type="submit" class="btn btn-success" value="Обновить">
+    </form>
+</div>
+{% endblock %}
